@@ -3,27 +3,26 @@ import os
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-DATA_FILE = "giveaway_data.json"
-REQUIRED_STARS = 3  # Minimum Stars required to unlock
+# JSON File Path
+JSON_FILE = "plugins/giveaway.json"
 
-# Load star data
-if os.path.exists(DATA_FILE):
-    with open(DATA_FILE, "r") as f:
+# Ensure the file exists with basic structure
+if not os.path.exists(JSON_FILE) or os.path.getsize(JSON_FILE) == 0:
+    with open(JSON_FILE, "w") as f:
+        f.write("{}")
+
+# Load JSON data safely
+with open(JSON_FILE, "r") as f:
+    try:
         giveaway_data = json.load(f)
-else:
-    giveaway_data = {}
+    except json.JSONDecodeError:
+        giveaway_data = {}
 
-def has_enough_stars(user_id: int) -> bool:
-    return str(user_id) in giveaway_data and giveaway_data[str(user_id)] >= REQUIRED_STARS
-
-@Client.on_message(filters.command("check") & filters.private)
+# Example handler (you can customize this)
+@Client.on_message(filters.command("stars") & filters.private)
 async def check_stars(client, message: Message):
-    user_id = message.from_user.id
-    if has_enough_stars(user_id):
-        await message.reply("✅ You have enough Stars! Premium access granted.")
-    else:
-        current = giveaway_data.get(str(user_id), 0)
-        await message.reply(
-            f"❌ You only have {current}⭐.\nYou need {REQUIRED_STARS}⭐ to unlock content.\n\n"
-            "Send more Stars to access premium content."
-                                       )
+    user_id = str(message.from_user.id)
+    stars = giveaway_data.get(user_id, 0)
+    await message.reply(f"🌟 You have {stars} stars.")
+
+# Add more handlers below if needed
