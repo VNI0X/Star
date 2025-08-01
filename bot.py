@@ -1,8 +1,6 @@
 from pyrogram import Client
 from config import API_ID, API_HASH, BOT_TOKEN
 
-import plugins.start
-
 app = Client(
     "StarEntryBot",
     api_id=API_ID,
@@ -11,4 +9,5 @@ app = Client(
     plugins={"root": "plugins"}
 )
 
+print("🚀 StarEntryBot started...")
 app.run()
