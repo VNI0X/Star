@@ -7,12 +7,13 @@ BOT_TOKEN = os.getenv("BOT_TOKEN", "7925420715:AAH755d3r1StHZWVCdnC5pwQbAkyM9aIn
 
 # Bot Owner / Admin ID
 ADMIN_ID = int(os.getenv("ADMIN_ID", "6972508083"))
+OWNER_USERNAME = "VNI0X"  # 🔥 Ye line add karni thi
 
 # How many stars are needed to unlock content
 REQUIRED_STARS = 1
 
 # Unlockable content message
-UNLOCK_MESSAGE = """
+UNLOCK_MESSAGE = f"""
 🎉 Congratulations!
 
 You've unlocked the premium content. Here's your access:
@@ -32,8 +33,8 @@ ENABLE_LOGGING = True
 GIFT_LINK = "https://t.me/StarEntryBot?start=gift"
 
 # Message shown to users before unlocking
-WELCOME_MESSAGE = """
-👋 Hello {user},
+WELCOME_MESSAGE = f"""
+👋 Hello {{user}},
 
 Welcome to Star Entry Bot! 🚀
 
@@ -41,5 +42,5 @@ To unlock premium content, please send ⭐ {REQUIRED_STARS} Star(s).
 
 Once done, type `/unlocked` to check your status.
 
-{gift}
+{{gift}}
 """
