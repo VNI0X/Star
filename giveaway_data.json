@@ -1,2 +1,1 @@
-cd ~/Star
-echo "{}" > giveaway_data.json
+echo '{}' > plugins/giveaway.json
