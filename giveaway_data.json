@@ -1,0 +1,2 @@
+cd ~/Star
+echo "{}" > giveaway_data.json
